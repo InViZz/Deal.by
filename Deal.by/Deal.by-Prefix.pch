@@ -15,4 +15,5 @@
     #import <Foundation/Foundation.h>
     #import "MGOrderAPI.h"
     #import "NSDate+DateParser.h"
+    #import "UIImageView+AFNetworking.h"
 #endif

@@ -9,7 +9,6 @@
 #import "MGDetailOrderViewController.h"
 #import "MGDetailOrderCell.h"
 #import "MGItemCell.h"
-#import "UIImageView+AFNetworking.h"
 
 @interface MGDetailOrderViewController ()
 

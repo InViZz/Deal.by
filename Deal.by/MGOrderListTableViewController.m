@@ -9,11 +9,13 @@
 #import "MGOrderListTableViewController.h"
 #import "MGDetailOrderViewController.h"
 #import "MGOrderListCell.h"
+#import "MGSearchOrderCell.h"
 #import "MGOrder.h"
 
-@interface MGOrderListTableViewController ()
+@interface MGOrderListTableViewController () <UISearchDisplayDelegate>
 
 @property (strong, nonatomic) NSArray *ordersContent;
+@property (strong, nonatomic) NSArray *searchResults;
 
 @end
 
@@ -34,11 +36,16 @@
     
     [[MGOrderAPI sharedClient] getOrdersWithBlock:^(NSArray *results, NSError *error) {
         if (results) {
-            NSLog(@"ORDERS: %@", results);
             self.ordersContent = results;
             [self.tableView reloadData];
         } else {
-            NSLog(@"ERROR: %@", error);
+            NSLog(@"ERROR: %@", [error description]);
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ошибка"
+                                                            message:[error description]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles: nil];
+            [alert show];
         }
     }];
 }
@@ -53,29 +60,81 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    return [self.ordersContent count];
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return [self.searchResults count];
+    } else {
+        return [self.ordersContent count];
+    }
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MGOrderListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OrderCell" forIndexPath:indexPath];
-    MGOrder *currentOrder = [self.ordersContent objectAtIndex:indexPath.row];
-    
-    cell.orderIDLabel.text = [NSString stringWithFormat:@"№ %@", currentOrder.orderID];
-    cell.orderDateLabel.text = [NSDate getDayFromDate:currentOrder.orderDate];
-    cell.customerNameLabel.text = currentOrder.customerName;
-    cell.orderPriceLabel.text = currentOrder.orderSummaryPrice;
-    cell.itemNameLabel.text = currentOrder.itemName;
-    if ([currentOrder.orderState isEqualToString:@"new"]) {
-        cell.backgroundColor = [UIColor whiteColor];
+    UITableViewCell *cell = nil;
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        [tableView registerNib:[UINib nibWithNibName:@"MGSearchOrderCell" bundle:nil] forCellReuseIdentifier:@"SearchOrderCell"];
+        MGSearchOrderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SearchOrderCell" forIndexPath:indexPath];
+        NSDictionary *currentItem = [self.searchResults objectAtIndex:indexPath.row];
+        
+        [cell.itemImageView setImageWithURL:[NSURL URLWithString:currentItem[@"image"]]];
+        cell.itemNameLabel.text = currentItem[@"name"];
+        cell.itemPriceLabel.text = [NSString stringWithFormat:@"%@ грн.", currentItem[@"price"]];
+        
+        return cell;
     } else {
-        cell.backgroundColor = [UIColor lightGrayColor];
-        cell.orderDateLabel.textColor = [UIColor blackColor];
+        MGOrderListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OrderCell" forIndexPath:indexPath];
+        MGOrder *currentOrder = [self.ordersContent objectAtIndex:indexPath.row];
+        
+        cell.orderIDLabel.text = [NSString stringWithFormat:@"№ %@", currentOrder.orderID];
+        cell.orderDateLabel.text = [NSDate getDayFromDate:currentOrder.orderDate];
+        cell.customerNameLabel.text = currentOrder.customerName;
+        cell.orderPriceLabel.text = [NSString stringWithFormat:@"%@ грн.", currentOrder.orderSummaryPrice];
+        cell.itemNameLabel.text = currentOrder.itemName;
+        if ([currentOrder.orderState isEqualToString:@"new"]) {
+            cell.backgroundColor = [UIColor whiteColor];
+            cell.orderDateLabel.textColor = [UIColor colorWithRed:43.0/255.0 green:187.0/255.0 blue:232.0/255.0 alpha:1.0];
+        } else {
+            cell.backgroundColor = [UIColor colorWithRed:230.0/255.0 green:230.0/255.0 blue:230.0/255.0 alpha:1.0];
+            cell.orderDateLabel.textColor = [UIColor blackColor];
+        }
+        
+        return cell;
     }
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat height = 57.0;
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        height = 100.0;
+    }
+    
+    return height;
+}
+
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+{
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"searchKeys CONTAINS[c] %@", searchText];
+    NSArray *searchOrderResults = [self.ordersContent filteredArrayUsingPredicate:resultPredicate];
+    NSMutableArray *searchItemResults = [NSMutableArray array];
+    [searchOrderResults enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        MGOrder *order = obj;
+        [searchItemResults addObjectsFromArray:order.items];
+    }];
+    
+    self.searchResults = searchItemResults;
+}
+
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self filterContentForSearchText:searchString
+                               scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
+                                      objectAtIndex:[self.searchDisplayController.searchBar
+                                                     selectedScopeButtonIndex]]];
+    
+    return YES;
 }
 
 #pragma mark - Navigation

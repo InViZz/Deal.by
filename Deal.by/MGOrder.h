@@ -20,5 +20,6 @@
 @property (strong, nonatomic) NSString *customerEmail;
 @property (strong, nonatomic) NSString *itemName;
 @property (strong, nonatomic) NSArray *items;
+@property (strong, nonatomic) NSString *searchKeys;
 
 @end

@@ -73,6 +73,7 @@ static NSString *kBaseURL = @"http://my.deal.by/";
     
     [arrayOfOrders enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         MGOrder *newOrder = [[MGOrder alloc] init];
+        NSMutableArray *searchKeys = [NSMutableArray array];
         newOrder.orderID = obj[@"_id"];
         newOrder.orderState = obj[@"_state"];
         newOrder.customerName = obj[@"name"];
@@ -81,13 +82,23 @@ static NSString *kBaseURL = @"http://my.deal.by/";
         newOrder.customerPhone = obj[@"phone"];
         newOrder.customerAddress = obj[@"address"];
         newOrder.customerEmail = obj[@"email"];
+        [searchKeys addObject:newOrder.orderID];
+        [searchKeys addObject:newOrder.customerName];
+        [searchKeys addObject:newOrder.customerPhone];
         if ([obj[@"items"][@"item"] isKindOfClass:[NSArray class]]) {
             newOrder.items = obj[@"items"][@"item"];
             newOrder.itemName = obj[@"items"][@"item"][0][@"name"];
+            [newOrder.items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                [searchKeys addObject:obj[@"_id"]];
+                [searchKeys addObject:obj[@"name"]];
+            }];
         } else {
             newOrder.items = [NSArray arrayWithObject:obj[@"items"][@"item"]];
             newOrder.itemName = obj[@"items"][@"item"][@"name"];
+            [searchKeys addObject:obj[@"items"][@"item"][@"_id"]];
+            [searchKeys addObject:newOrder.itemName];
         }
+        newOrder.searchKeys = [searchKeys componentsJoinedByString:@" "];
         
         [parsedOrders addObject:newOrder];
     }];
