@@ -11,6 +11,8 @@
 
 @interface MGDetailOrderViewController : UITableViewController
 
+@property NSUInteger detailedContentIndex;
 @property (strong, nonatomic) MGOrder *detailedContent;
+@property (strong, nonatomic) NSArray *ordersContent;
 
 @end

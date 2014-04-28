@@ -147,6 +147,8 @@
     
     MGDetailOrderViewController *detailViewController = [segue destinationViewController];
     [detailViewController setDetailedContent:selectedOrder];
+    [detailViewController setOrdersContent:self.ordersContent];
+    [detailViewController setDetailedContentIndex:selectedIndexPath.row];
 }
 
 

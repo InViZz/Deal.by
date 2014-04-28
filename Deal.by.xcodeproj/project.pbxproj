@@ -32,6 +32,8 @@
 		5A0CD9DB190C8608004A1267 /* MGDetailOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0CD9DA190C8608004A1267 /* MGDetailOrderCell.m */; };
 		5A0CD9DF190D59BF004A1267 /* MGSearchOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0CD9DE190D59BF004A1267 /* MGSearchOrderCell.m */; };
 		5AA84639190D6F3C005895F3 /* MGSearchOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AA84638190D6F3C005895F3 /* MGSearchOrderCell.xib */; };
+		5AA8463F190D9EBF005895F3 /* MGDetailOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AA8463E190D9EBF005895F3 /* MGDetailOrderCell.xib */; };
+		5AA84641190D9ECC005895F3 /* MGItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AA84640190D9ECC005895F3 /* MGItemCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +86,8 @@
 		5A0CD9DD190D59BF004A1267 /* MGSearchOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSearchOrderCell.h; sourceTree = "<group>"; };
 		5A0CD9DE190D59BF004A1267 /* MGSearchOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSearchOrderCell.m; sourceTree = "<group>"; };
 		5AA84638190D6F3C005895F3 /* MGSearchOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGSearchOrderCell.xib; sourceTree = "<group>"; };
+		5AA8463E190D9EBF005895F3 /* MGDetailOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGDetailOrderCell.xib; sourceTree = "<group>"; };
+		5AA84640190D9ECC005895F3 /* MGItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGItemCell.xib; sourceTree = "<group>"; };
 		F4C2F64DEDAE4C19917B5459 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -215,8 +219,10 @@
 				5AA84638190D6F3C005895F3 /* MGSearchOrderCell.xib */,
 				5A0CD9D9190C8608004A1267 /* MGDetailOrderCell.h */,
 				5A0CD9DA190C8608004A1267 /* MGDetailOrderCell.m */,
+				5AA8463E190D9EBF005895F3 /* MGDetailOrderCell.xib */,
 				5A0CD9D6190C84C3004A1267 /* MGItemCell.h */,
 				5A0CD9D7190C84C3004A1267 /* MGItemCell.m */,
+				5AA84640190D9ECC005895F3 /* MGItemCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -311,7 +317,9 @@
 			files = (
 				5AA84639190D6F3C005895F3 /* MGSearchOrderCell.xib in Resources */,
 				5A0CD99B190C2192004A1267 /* Images.xcassets in Resources */,
+				5AA8463F190D9EBF005895F3 /* MGDetailOrderCell.xib in Resources */,
 				5A0CD98D190C2192004A1267 /* InfoPlist.strings in Resources */,
+				5AA84641190D9ECC005895F3 /* MGItemCell.xib in Resources */,
 				5A0CD996190C2192004A1267 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
