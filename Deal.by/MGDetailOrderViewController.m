@@ -16,6 +16,10 @@
 
 @interface MGDetailOrderViewController ()
 
+@property (nonatomic, strong) UIDynamicAnimator *animator;
+@property (nonatomic, strong) UIGravityBehavior *gravityBehaviour;
+@property (nonatomic, strong) UIPushBehavior *pushBehavior;
+
 @end
 
 @implementation MGDetailOrderViewController
@@ -47,6 +51,36 @@
     [self.view addGestureRecognizer:rightRecognizer];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self setupDynamicKit];
+}
+
+- (void)setupDynamicKit
+{
+    self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.navigationController.view];
+    
+    UICollisionBehavior *collisionBehaviour = [[UICollisionBehavior alloc] initWithItems:@[self.view]];
+    // Need to create a boundary that lies to the left off of the right edge of the screen.
+    [collisionBehaviour setTranslatesReferenceBoundsIntoBoundaryWithInsets:UIEdgeInsetsMake(0, 0, 0, -280)];
+    [self.animator addBehavior:collisionBehaviour];
+    
+    self.gravityBehaviour = [[UIGravityBehavior alloc] initWithItems:@[self.view]];
+    self.gravityBehaviour.gravityDirection = CGVectorMake(-1, 0);
+    [self.animator addBehavior:self.gravityBehaviour];
+    
+    self.pushBehavior = [[UIPushBehavior alloc] initWithItems:@[self.view] mode:UIPushBehaviorModeInstantaneous];
+    self.pushBehavior.magnitude = 0.0f;
+    self.pushBehavior.angle = 0.0f;
+    [self.animator addBehavior:self.pushBehavior];
+    
+    UIDynamicItemBehavior *itemBehaviour = [[UIDynamicItemBehavior alloc] initWithItems:@[self.view]];
+    itemBehaviour.elasticity = 0.45f;
+    [self.animator addBehavior:itemBehaviour];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -69,6 +103,9 @@
                              [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:self.navigationController.view cache:NO];
                          }];
 
+    } else {
+        self.pushBehavior.pushDirection = CGVectorMake(35.0f, 0.0f);
+        self.pushBehavior.active = YES;
     }
 }
 
@@ -87,6 +124,9 @@
                              [self.navigationController pushViewController:nextViewController animated:NO];
                              [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:self.navigationController.view cache:NO];
                          }];
+    } else {
+        self.pushBehavior.pushDirection = CGVectorMake(35.0f, 0.0f);
+        self.pushBehavior.active = YES;
     }
 }
 

@@ -15,7 +15,6 @@
 		5A0CD98F190C2192004A1267 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0CD98E190C2192004A1267 /* main.m */; };
 		5A0CD993190C2192004A1267 /* MGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0CD992190C2192004A1267 /* MGAppDelegate.m */; };
 		5A0CD996190C2192004A1267 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A0CD994190C2192004A1267 /* Main.storyboard */; };
-		5A0CD999190C2192004A1267 /* MGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0CD998190C2192004A1267 /* MGViewController.m */; };
 		5A0CD99B190C2192004A1267 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A0CD99A190C2192004A1267 /* Images.xcassets */; };
 		5A0CD9A2190C2192004A1267 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A0CD9A1190C2192004A1267 /* XCTest.framework */; };
 		5A0CD9A3190C2192004A1267 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A0CD982190C2192004A1267 /* Foundation.framework */; };
@@ -31,6 +30,7 @@
 		5A0CD9D8190C84C3004A1267 /* MGItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0CD9D7190C84C3004A1267 /* MGItemCell.m */; };
 		5A0CD9DB190C8608004A1267 /* MGDetailOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0CD9DA190C8608004A1267 /* MGDetailOrderCell.m */; };
 		5A0CD9DF190D59BF004A1267 /* MGSearchOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0CD9DE190D59BF004A1267 /* MGSearchOrderCell.m */; };
+		5A24C7F2190EF5BA009E2BB0 /* MGSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A24C7F1190EF5BA009E2BB0 /* MGSplashViewController.m */; };
 		5AA84639190D6F3C005895F3 /* MGSearchOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AA84638190D6F3C005895F3 /* MGSearchOrderCell.xib */; };
 		5AA8463F190D9EBF005895F3 /* MGDetailOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AA8463E190D9EBF005895F3 /* MGDetailOrderCell.xib */; };
 		5AA84641190D9ECC005895F3 /* MGItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AA84640190D9ECC005895F3 /* MGItemCell.xib */; };
@@ -59,8 +59,6 @@
 		5A0CD991190C2192004A1267 /* MGAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGAppDelegate.h; sourceTree = "<group>"; };
 		5A0CD992190C2192004A1267 /* MGAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MGAppDelegate.m; sourceTree = "<group>"; };
 		5A0CD995190C2192004A1267 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		5A0CD997190C2192004A1267 /* MGViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGViewController.h; sourceTree = "<group>"; };
-		5A0CD998190C2192004A1267 /* MGViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MGViewController.m; sourceTree = "<group>"; };
 		5A0CD99A190C2192004A1267 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5A0CD9A0190C2192004A1267 /* Deal.byTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Deal.byTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A0CD9A1190C2192004A1267 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -85,6 +83,8 @@
 		5A0CD9DA190C8608004A1267 /* MGDetailOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGDetailOrderCell.m; sourceTree = "<group>"; };
 		5A0CD9DD190D59BF004A1267 /* MGSearchOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSearchOrderCell.h; sourceTree = "<group>"; };
 		5A0CD9DE190D59BF004A1267 /* MGSearchOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSearchOrderCell.m; sourceTree = "<group>"; };
+		5A24C7F0190EF5BA009E2BB0 /* MGSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSplashViewController.h; sourceTree = "<group>"; };
+		5A24C7F1190EF5BA009E2BB0 /* MGSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSplashViewController.m; sourceTree = "<group>"; };
 		5AA84638190D6F3C005895F3 /* MGSearchOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGSearchOrderCell.xib; sourceTree = "<group>"; };
 		5AA8463E190D9EBF005895F3 /* MGDetailOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGDetailOrderCell.xib; sourceTree = "<group>"; };
 		5AA84640190D9ECC005895F3 /* MGItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGItemCell.xib; sourceTree = "<group>"; };
@@ -157,12 +157,12 @@
 				5A0CD991190C2192004A1267 /* MGAppDelegate.h */,
 				5A0CD992190C2192004A1267 /* MGAppDelegate.m */,
 				5A0CD994190C2192004A1267 /* Main.storyboard */,
+				5A24C7F0190EF5BA009E2BB0 /* MGSplashViewController.h */,
+				5A24C7F1190EF5BA009E2BB0 /* MGSplashViewController.m */,
 				5A0CD9B7190C327D004A1267 /* MGOrderListTableViewController.h */,
 				5A0CD9B8190C327D004A1267 /* MGOrderListTableViewController.m */,
 				5A0CD9D0190C83B4004A1267 /* MGDetailOrderViewController.h */,
 				5A0CD9D1190C83B4004A1267 /* MGDetailOrderViewController.m */,
-				5A0CD997190C2192004A1267 /* MGViewController.h */,
-				5A0CD998190C2192004A1267 /* MGViewController.m */,
 				5A0CD99A190C2192004A1267 /* Images.xcassets */,
 				5A0CD989190C2192004A1267 /* Supporting Files */,
 			);
@@ -378,10 +378,10 @@
 				5A0CD9D2190C83B4004A1267 /* MGDetailOrderViewController.m in Sources */,
 				5A0CD9CE190C4B50004A1267 /* NSDate+DateParser.m in Sources */,
 				5A0CD9BD190C359E004A1267 /* MGOrderAPI.m in Sources */,
-				5A0CD999190C2192004A1267 /* MGViewController.m in Sources */,
 				5A0CD9D8190C84C3004A1267 /* MGItemCell.m in Sources */,
 				5A0CD9DF190D59BF004A1267 /* MGSearchOrderCell.m in Sources */,
 				5A0CD98F190C2192004A1267 /* main.m in Sources */,
+				5A24C7F2190EF5BA009E2BB0 /* MGSplashViewController.m in Sources */,
 				5A0CD9DB190C8608004A1267 /* MGDetailOrderCell.m in Sources */,
 				5A0CD9CA190C4896004A1267 /* MGOrder.m in Sources */,
 			);

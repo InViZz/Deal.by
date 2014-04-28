@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Splash View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="MGViewController" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="MGSplashViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -15,11 +15,56 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo_main-trans" translatesAutoresizingMaskIntoConstraints="NO" id="sxv-s5-LA0">
+                                <rect key="frame" x="78" y="104" width="164" height="69"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Gg4-jH-qdF">
+                                <rect key="frame" x="150" y="274" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" red="0.16862745579999999" green="0.73333334920000004" blue="0.90980398650000005" alpha="1" colorSpace="deviceRGB"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Загрузка данных..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RbJ-Nl-lLG">
+                                <rect key="frame" x="78" y="302" width="164" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="5AY-zn-fRW"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="Gg4-jH-qdF" id="4ey-NM-Bla"/>
+                        <segue destination="i0t-XA-Ivw" kind="modal" identifier="OrderList" modalTransitionStyle="flipHorizontal" id="8YX-fq-ORB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="279" y="92"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="4Vm-yn-1xt">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="i0t-XA-Ivw" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="t6t-eN-Vf4"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Bah-cw-Jne">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.16862745579999999" green="0.73333334920000004" blue="0.90980398650000005" alpha="1" colorSpace="deviceRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="18w-tR-YCM" kind="relationship" relationship="rootViewController" id="ViA-aI-35o"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vlw-ag-bVE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="690" y="92"/>
         </scene>
         <!--Order List Table View Controller - Заказы-->
         <scene sceneID="Zec-V9-zuK">
@@ -29,6 +74,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.16862745579999999" green="0.73333334920000004" blue="0.90980398650000005" alpha="1" colorSpace="deviceRGB"/>
                         <color key="separatorColor" red="0.16862745579999999" green="0.73333334920000004" blue="0.90980398650000005" alpha="1" colorSpace="deviceRGB"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="O72-VE-Luv">
@@ -113,7 +159,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="1092" y="109"/>
+            <point key="canvasLocation" x="1114" y="92"/>
         </scene>
         <!--Detail Order View Controller - Заказ № 14864463-->
         <scene sceneID="rRw-29-Qh8">
@@ -132,12 +178,13 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gTC-A3-smy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1519" y="109"/>
+            <point key="canvasLocation" x="1564" y="92"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Woq-0d-d38">
             <objects>
-                <navigationController definesPresentationContext="YES" id="O6T-G7-7bY" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" navigationBarHidden="YES" id="O6T-G7-7bY" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="clg-GB-2Pi"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="y3t-iM-H1u">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -147,14 +194,17 @@
                         </textAttributes>
                     </navigationBar>
                     <connections>
-                        <segue destination="18w-tR-YCM" kind="relationship" relationship="rootViewController" id="qkx-3P-iDz"/>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="7Bl-Uv-opi"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="13p-du-TzG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="626" y="109"/>
+            <point key="canvasLocation" x="-188" y="92"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logo_main-trans" width="164" height="69"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

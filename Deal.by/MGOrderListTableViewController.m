@@ -14,7 +14,6 @@
 
 @interface MGOrderListTableViewController () <UISearchDisplayDelegate>
 
-@property (strong, nonatomic) NSArray *ordersContent;
 @property (strong, nonatomic) NSArray *searchResults;
 
 @end
@@ -34,6 +33,22 @@
 {
     [super viewDidLoad];
     
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self
+                       action:@selector(refresh)
+             forControlEvents:UIControlEventValueChanged];
+    
+    self.refreshControl = refreshControl;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)refresh
+{
     [[MGOrderAPI sharedClient] getOrdersWithBlock:^(NSArray *results, NSError *error) {
         if (results) {
             self.ordersContent = results;
@@ -41,19 +56,15 @@
         } else {
             NSLog(@"ERROR: %@", [error description]);
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ошибка"
-                                                            message:[error description]
+                                                            message:@"Произошла ошибка при получении данных. Попробуйте повторить позже"
                                                            delegate:nil
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles: nil];
             [alert show];
         }
+        
+        [self.refreshControl endRefreshing];
     }];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source

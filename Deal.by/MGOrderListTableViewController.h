@@ -10,4 +10,6 @@
 
 @interface MGOrderListTableViewController : UITableViewController
 
+@property (strong, nonatomic) NSArray *ordersContent;
+
 @end
