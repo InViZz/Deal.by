@@ -9,6 +9,7 @@
 #import "MGOrderAPI.h"
 #import "XMLDictionary.h"
 #import "MGOrder.h"
+#import "MGItem.h"
 
 @implementation MGOrderAPI
 
@@ -86,14 +87,30 @@ static NSString *kBaseURL = @"http://my.deal.by/";
         [searchKeys addObject:newOrder.customerName];
         [searchKeys addObject:newOrder.customerPhone];
         if ([obj[@"items"][@"item"] isKindOfClass:[NSArray class]]) {
-            newOrder.items = obj[@"items"][@"item"];
             newOrder.itemName = obj[@"items"][@"item"][0][@"name"];
-            [newOrder.items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                [searchKeys addObject:obj[@"_id"]];
-                [searchKeys addObject:obj[@"name"]];
+            NSArray *itemsArrayObj = obj[@"items"][@"item"];
+            NSMutableArray *items = [NSMutableArray array];
+            [itemsArrayObj enumerateObjectsUsingBlock:^(id itemObj, NSUInteger idx, BOOL *stop) {
+                [searchKeys addObject:itemObj[@"_id"]];
+                [searchKeys addObject:itemObj[@"name"]];
+                MGItem *item = [[MGItem alloc] init];
+                item.orderID = newOrder.orderID;
+                item.itemName = itemObj[@"name"];
+                item.itemPrice = itemObj[@"price"];
+                item.itemQuantity = itemObj[@"quantity"];
+                item.itemImage = itemObj[@"image"];
+                [items addObject:item];
             }];
+            newOrder.items = items;
         } else {
-            newOrder.items = [NSArray arrayWithObject:obj[@"items"][@"item"]];
+            NSDictionary *itemObj = obj[@"items"][@"item"];
+            MGItem *item = [[MGItem alloc] init];
+            item.orderID = newOrder.orderID;
+            item.itemName = itemObj[@"name"];
+            item.itemPrice = itemObj[@"price"];
+            item.itemQuantity = itemObj[@"quantity"];
+            item.itemImage = itemObj[@"image"];
+            newOrder.items = [NSArray arrayWithObject:item];
             newOrder.itemName = obj[@"items"][@"item"][@"name"];
             [searchKeys addObject:obj[@"items"][@"item"][@"_id"]];
             [searchKeys addObject:newOrder.itemName];

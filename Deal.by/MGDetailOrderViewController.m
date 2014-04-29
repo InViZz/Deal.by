@@ -10,6 +10,7 @@
 #import "MGOrderListTableViewController.h"
 #import "MGDetailOrderCell.h"
 #import "MGItemCell.h"
+#import "MGItem.h"
 
 #define ANIMATION_DURATION 0.75
 #define FOOTER_HEIGHT 50.0
@@ -17,6 +18,7 @@
 @interface MGDetailOrderViewController ()
 
 @property (nonatomic, strong) UIDynamicAnimator *animator;
+@property (nonatomic, strong) UICollisionBehavior *collisionBehaviour;
 @property (nonatomic, strong) UIGravityBehavior *gravityBehaviour;
 @property (nonatomic, strong) UIPushBehavior *pushBehavior;
 
@@ -62,10 +64,9 @@
 {
     self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.navigationController.view];
     
-    UICollisionBehavior *collisionBehaviour = [[UICollisionBehavior alloc] initWithItems:@[self.view]];
-    // Need to create a boundary that lies to the left off of the right edge of the screen.
-    [collisionBehaviour setTranslatesReferenceBoundsIntoBoundaryWithInsets:UIEdgeInsetsMake(0, 0, 0, -280)];
-    [self.animator addBehavior:collisionBehaviour];
+    self.collisionBehaviour = [[UICollisionBehavior alloc] initWithItems:@[self.view]];
+    [self.collisionBehaviour setTranslatesReferenceBoundsIntoBoundaryWithInsets:UIEdgeInsetsMake(0, 0, 0, -280.0)];
+    [self.animator addBehavior:self.collisionBehaviour];
     
     self.gravityBehaviour = [[UIGravityBehavior alloc] initWithItems:@[self.view]];
     self.gravityBehaviour.gravityDirection = CGVectorMake(-1, 0);
@@ -77,7 +78,7 @@
     [self.animator addBehavior:self.pushBehavior];
     
     UIDynamicItemBehavior *itemBehaviour = [[UIDynamicItemBehavior alloc] initWithItems:@[self.view]];
-    itemBehaviour.elasticity = 0.45f;
+    itemBehaviour.elasticity = 0.65f;
     [self.animator addBehavior:itemBehaviour];
 }
 
@@ -104,6 +105,17 @@
                          }];
 
     } else {
+        // new collision and gravity for last order 
+        [self.animator removeBehavior:self.collisionBehaviour];
+        self.collisionBehaviour = [[UICollisionBehavior alloc] initWithItems:@[self.view]];
+        [self.collisionBehaviour setTranslatesReferenceBoundsIntoBoundaryWithInsets:UIEdgeInsetsMake(0, -280.0, 0, 0)];
+        [self.animator addBehavior:self.collisionBehaviour];
+        
+        [self.animator removeBehavior:self.gravityBehaviour];
+        self.gravityBehaviour = [[UIGravityBehavior alloc] initWithItems:@[self.view]];
+        self.gravityBehaviour.gravityDirection = CGVectorMake(1, 0);
+        [self.animator addBehavior:self.gravityBehaviour];
+        
         self.pushBehavior.pushDirection = CGVectorMake(35.0f, 0.0f);
         self.pushBehavior.active = YES;
     }
@@ -164,11 +176,11 @@
         return cell;
     } else {
         MGItemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ItemCell" forIndexPath:indexPath];
-        NSDictionary *item = [[self.detailedContent items] objectAtIndex:row - 1];
-        cell.itemNameLabel.text = item[@"name"];
-        cell.itemCountAndPriceLabel.text = [NSString stringWithFormat:@"%@ грн. | %@ шт.", item[@"price"], item[@"quantity"]];
-        cell.itemPriceSummaryLabel.text = [NSString stringWithFormat:@"%.2f грн.", [item[@"price"] floatValue] * [item[@"quantity"] floatValue]];
-        [cell.itemImageView setImageWithURL:[NSURL URLWithString:item[@"image"]] placeholderImage:[UIImage imageNamed:@""]];
+        MGItem *item = [[self.detailedContent items] objectAtIndex:row - 1];
+        cell.itemNameLabel.text = item.itemName;
+        cell.itemCountAndPriceLabel.text = [NSString stringWithFormat:@"%@ грн. | %@ шт.", item.itemPrice, item.itemQuantity];
+        cell.itemPriceSummaryLabel.text = [NSString stringWithFormat:@"%.2f грн.", [item.itemPrice floatValue] * [item.itemQuantity floatValue]];
+        [cell.itemImageView setImageWithURL:[NSURL URLWithString:item.itemImage] placeholderImage:[UIImage imageNamed:@"noimage"]];
         
         return cell;
     }
