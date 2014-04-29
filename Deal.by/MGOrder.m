@@ -1,13 +1,13 @@
 //
-//  MGViewController.h
+//  MGOrder.m
 //  Deal.by
 //
 //  Created by Morion Black on 4/26/14.
 //  Copyright (c) 2014 Morion Black. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "MGOrder.h"
 
-@interface MGViewController : UIViewController
+@implementation MGOrder
 
 @end
